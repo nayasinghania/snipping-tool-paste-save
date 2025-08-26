@@ -1,40 +1,22 @@
-import keyboard
-import time
-from tkinter import filedialog, Tk
-from PIL import ImageGrab, Image
-import clipboard
-from io import BytesIO
+import tkinter as tk
+from tkinter import filedialog
 
-def paste_image(image: Image.Image):
-    """Reinsert image into clipboard so Ctrl+V works."""
-    output = BytesIO()
-    image.convert("RGB").save(output, format="BMP")
-    data = output.getvalue()
-    clipboard.copy("")        # clear any text
-    clipboard.copy_image(data) # put image into clipboard
+def main():
+    root = tk.Tk()
+    root.withdraw()
+    try:
+        while True:
+            print("Hello, World!")
+            file_path = filedialog.askopenfilename(
+                title="Select a file",
+                filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
+            )
+            if file_path:
+                print("You selected:", file_path)
+            else:
+                print("No file selected.")
+    except KeyboardInterrupt:
+        print("\n🛑 Exiting...")
 
-def handle_paste():
-    img = ImageGrab.grabclipboard()
-    if img:
-        root = Tk()
-        root.withdraw()
-        save_path = filedialog.asksaveasfilename(
-            defaultextension=".png",
-            filetypes=[("PNG files", "*.png")],
-            initialfile="screenshot.png"
-        )
-        if save_path:
-            img.save(save_path, "PNG")
-            print(f"Saved screenshot as {save_path}")
-        root.destroy()
-
-        paste_image(img)
-        keyboard.send("ctrl+v")
-    else:
-        keyboard.send("ctrl+v")
-
-keyboard.add_hotkey("ctrl+v", handle_paste, suppress=True)
-
-print("Running... Press Ctrl+C to exit.")
-while True:
-    time.sleep(1)
+if __name__ == "__main__":
+    main()

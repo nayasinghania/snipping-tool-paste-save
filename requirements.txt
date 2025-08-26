@@ -1,4 +1,1 @@
-pillow
-keyboard
-clipboard
-pyinstaller
+tkinter
