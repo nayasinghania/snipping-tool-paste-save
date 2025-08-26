@@ -1,0 +1,4 @@
+pillow
+keyboard
+clipboard
+pyinstaller
