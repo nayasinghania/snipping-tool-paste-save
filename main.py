@@ -13,7 +13,6 @@ def main():
         print("Clipboard does not contain an image. Skipping...")
         return
     file_path = filedialog.asksaveasfilename(
-        parent=root,
         title="Save image as...",
         defaultextension=".png",
         filetypes=[
@@ -36,7 +35,7 @@ def main():
 if __name__ == "__main__":
     root = tk.Tk()
     root.withdraw()
-    root.attributes("-topmost", True)  # <-- Add this line
+    root.attributes("-topmost", True)
 
     try:
         while True:
