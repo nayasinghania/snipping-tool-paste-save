@@ -1,22 +1,46 @@
+from PIL import Image, ImageGrab
 import tkinter as tk
 from tkinter import filedialog
+import keyboard
+import os
+
 
 def main():
-    root = tk.Tk()
-    root.withdraw()
-    try:
-        while True:
-            print("Hello, World!")
-            file_path = filedialog.askopenfilename(
-                title="Select a file",
-                filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
-            )
-            if file_path:
-                print("You selected:", file_path)
-            else:
-                print("No file selected.")
-    except KeyboardInterrupt:
-        print("\n🛑 Exiting...")
+    keyboard.wait("ctrl+v")
+    print("Paste operation")
+    im = ImageGrab.grabclipboard()
+    if not isinstance(im, Image.Image):
+        print("Clipboard does not contain an image. Skipping...")
+        return
+    file_path = filedialog.asksaveasfilename(
+        parent=root,
+        title="Save image as...",
+        defaultextension=".png",
+        filetypes=[
+            ("PNG files", "*.png"),
+            ("JPEG files", "*.jpg;*.jpeg"),
+            ("All files", "*.*"),
+        ],
+    )
+    if file_path:
+        im.save(file_path)
+        print(f"Image saved to: {file_path}")
+        directory = os.path.dirname(file_path)
+        os.remove(os.path.join(directory, "image.png"))
+        print(f"Deleted image.png from: {directory}")
+
+    else:
+        print("No file selected.")
+
 
 if __name__ == "__main__":
-    main()
+    root = tk.Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)  # <-- Add this line
+
+    try:
+        while True:
+            main()
+    except KeyboardInterrupt:
+        print("Stopping...")
+        exit(0)
