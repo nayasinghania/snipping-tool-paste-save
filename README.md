@@ -11,4 +11,5 @@ A small python utility that, upon pasting an image, asks where you want to save 
 ## Packaging
 This code can be packaged as `snip-util.exe`
 1. `sh package.sh`
-2. Find `snip-util.exe` in `dist/`
+2. Run `snip-util.exe` in `dist/`
+3. Currently the only way to stop the exe is to end the `snip-util.exe` task in your task manager
