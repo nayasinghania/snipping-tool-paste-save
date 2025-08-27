@@ -9,4 +9,6 @@ A small python utility that, upon pasting an image, asks where you want to save 
 2. Stop with `ctrl-c`
 
 ## Packaging
-This code can be packaged as `snip-utility.exe`. Details coming soon
+This code can be packaged as `snip-util.exe`
+1. `sh package.sh`
+2. Find `snip-util.exe` in `dist/`
