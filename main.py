@@ -1,3 +1,5 @@
+#v1.0.0
+
 from PIL import Image, ImageGrab
 import tkinter as tk
 from tkinter import filedialog
